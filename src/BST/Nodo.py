@@ -5,3 +5,5 @@ class Nodo[T]:
         self.valor = valor
         self.izquierda = izquierda
         self.derecha = derecha
+
+    
