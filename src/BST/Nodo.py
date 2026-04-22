@@ -1,13 +1,12 @@
 from __future__ import annotations
-from typing import Generic, TypeVar, Optional
-
-T = TypeVar('T')
+from typing import Generic, Optional
+from .types import T
 
 class Nodo(Generic[T]):
-    def __init__(self, valor:int, izquierda:Optional[Nodo[T]], derecha:Optional[Nodo[T]]) -> None:
-        self.valor = valor
-        self.izquierda = izquierda
-        self.derecha = derecha
+    def __init__(self, valor: T, izquierda:Optional[Nodo[T]] = None, derecha:Optional[Nodo[T]] = None) -> None:
+        self.valor: T = valor
+        self.izquierda: Optional[Nodo[T]] = izquierda
+        self.derecha: Optional[Nodo[T]] = derecha
 
     def __eq__(self, other: object) -> bool:
         if not isinstance(other, Nodo):
