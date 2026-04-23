@@ -1,8 +1,8 @@
+from .types import T
 from typing import Generic, Optional
 
 from BST.IBinaryTree import *
 from BST.Nodo import Nodo
-from .types import T
 
 class BST(Generic[T], IBinaryTree[T]):
     def __init__(self):
