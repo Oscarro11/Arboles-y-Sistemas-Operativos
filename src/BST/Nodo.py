@@ -1,5 +1,5 @@
-from .types import T
 from __future__ import annotations
+from .types import T
 from typing import Generic, Optional
 
 class Nodo(Generic[T]):
