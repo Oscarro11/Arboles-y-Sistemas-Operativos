@@ -1,9 +1,9 @@
-from typing import List, Tuple, TypeVar
+from typing import List, Tuple, Generic
 from abc import ABC, abstractmethod
 
-T = TypeVar("T")
+from .types import T
 
-class IBinaryTree[T](ABC):
+class IBinaryTree(Generic[T], ABC):
 
     # Inserta un elemento. True si se inserto y false si ya existe.
     @abstractmethod
