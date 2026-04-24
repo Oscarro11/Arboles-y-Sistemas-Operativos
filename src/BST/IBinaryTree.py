@@ -1,7 +1,7 @@
+from .types import T
+
 from typing import List, Tuple, Generic
 from abc import ABC, abstractmethod
-
-from .types import T
 
 class IBinaryTree(Generic[T], ABC):
 

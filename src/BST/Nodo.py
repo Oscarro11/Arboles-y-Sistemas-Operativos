@@ -1,6 +1,6 @@
 from __future__ import annotations
-from typing import Generic, Optional
 from .types import T
+from typing import Generic, Optional
 
 class Nodo(Generic[T]):
     def __init__(self, valor: T, izquierda:Optional[Nodo[T]] = None, derecha:Optional[Nodo[T]] = None) -> None:
