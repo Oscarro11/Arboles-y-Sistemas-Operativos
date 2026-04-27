@@ -19,13 +19,17 @@ class Controlador:
         self.bst_redblack = RedBlackTree[int]()
 
         # Genera procesos aleatorios
-        procesos_vals = random.sample(range(1, procesos+1), procesos)
+        procesos_vals = random.sample(range(1, procesos+5000), procesos)
 
         # Inserta los procesos en los árboles
         for val in procesos_vals:
             self.bst_simple.insertar(val)
             self.bst_splay.insertar(val)
             self.bst_redblack.insertar(val)
+
+        self.bst_simple.preOrderGraph("BST A")
+        self.bst_splay.preOrderGraph("Splay A")
+        self.bst_redblack.preOrderGraph("Red&Black A")
 
         # Busca 100 procesos aleatorios
         busquedas = random.sample(procesos_vals, min(num_busquedas, procesos))
@@ -80,6 +84,10 @@ class Controlador:
             self.bst_splay.insertar(val)
             self.bst_redblack.insertar(val)
 
+        self.bst_simple.preOrderGraph("BST B")
+        self.bst_splay.preOrderGraph("Splay B")
+        self.bst_redblack.preOrderGraph("Red&Black B")
+
         # Crea una lista para guardar las iteraciones
         iteraciones_bst: int = self.bst_simple.buscar(1000)[1]
         iteraciones_splay: int = self.bst_splay.buscar(1000)[1]
@@ -100,13 +108,17 @@ class Controlador:
         self.bst_redblack = RedBlackTree[int]()
 
         # Genera procesos aleatorios
-        procesos_vals = random.sample(range(1, procesos+1), procesos)
+        procesos_vals = random.sample(range(1, procesos+5000), procesos)
 
         # Inserta los procesos en los árboles
         for val in procesos_vals:
             self.bst_simple.insertar(val)
             self.bst_splay.insertar(val)
             self.bst_redblack.insertar(val)
+
+        self.bst_simple.preOrderGraph("BST C")
+        self.bst_splay.preOrderGraph("Splay C")
+        self.bst_redblack.preOrderGraph("Red&Black C")
 
         # Busca el mismo proceso 50 veces
         busqueda = random.choice(procesos_vals)

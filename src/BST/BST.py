@@ -1,8 +1,11 @@
+import graphviz
+from pathlib import Path
+
 from .types import T
 from typing import Generic, Optional
 
 from BST.IBinaryTree import *
-from BST.Nodo import Nodo
+from BST.Nodo import Nodo, N
 
 class BST(Generic[T], IBinaryTree[T]):
     def __init__(self):
@@ -124,3 +127,28 @@ class BST(Generic[T], IBinaryTree[T]):
             
         _inorder(self.raiz)
         return resultado
+    
+    def preOrderGraph (self, name: str) -> None:
+        dot = graphviz.Digraph(comment=f"{self.__class__}")
+        if self.raiz is not None: self._preOrderGraph(self.raiz, dot)
+
+        script_location = Path(__file__).resolve().parent
+        save_file = script_location / ".." / ".." / "resources" / "structures" / f"{name} structure.gv"
+
+        dot.render(save_file)
+    
+    def _preOrderGraph (self, node: N, graph: graphviz.Digraph) -> None:
+        if node is None:
+            return
+        else:
+            graph.node(f"{node.valor}", f"{node.valor}")
+
+            if node.derecha is not None:
+                graph.node(f"{node.derecha.valor}", f"{node.derecha.valor}")
+                graph.edge(f"{node.valor}", f"{node.derecha.valor}", constraint='true')
+                self._preOrderGraph(node.derecha, graph)
+
+            if node.izquierda is not None:
+                graph.node(f"{node.izquierda.valor}", f"{node.izquierda.valor}")
+                graph.edge(f"{node.valor}", f"{node.izquierda.valor}", constraint='true')
+                self._preOrderGraph(node.izquierda, graph)
