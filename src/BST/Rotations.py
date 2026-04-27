@@ -1,35 +1,36 @@
-from BST.Nodo import Nodo
+from BST.Nodo import N
 
-def zig(padre:Nodo) -> Nodo:
-    if padre.izquierda != None:
-        hijo = padre.izquierda
+def zig(padre: N) -> N:
+    hijo = padre.izquierda
+
+    if hijo is None:
+        raise Exception(f"No puede hacerse la operacion de zig, debido a que {padre.valor} no tiene hijo izquierdo")
+    else:
         padre.izquierda = hijo.derecha
-        return Nodo(hijo.valor, hijo.izquierda, padre)
-    
-    else:
-        raise Exception(f"No puede realizarse zig debido a que {padre.valor} no tiene hijo izquierdo")
-
-def zag(padre:Nodo) -> Nodo:
-    if padre.derecha != None:
-        hijo = padre.derecha
-        padre.derecha = hijo.izquierda
-        return Nodo(hijo.valor, padre, hijo.derecha)
-    
-    else:
-        raise Exception(f"No puede realizarse zag debido a que {padre.valor} no tiene hijo derecho")
-    
-def zig_zig(abuelo:Nodo) -> Nodo:
-    if abuelo.izquierda == None:
-        raise Exception(f"No puede realizarse zig-zig debido a que {abuelo.valor} no tiene hijo izquierdo")
-    
-    else:
-        padre = abuelo.izquierda
-        if padre.izquierda == None:
-            raise Exception(f"No puede realizarse zig-zig debido a que {padre.valor} no tiene hijo izquierdo")
-        
-        else:
-            hijo = padre.izquierda
+        hijo.derecha = padre
+        return hijo
             
+def zag(padre: N) -> N:
+    hijo = padre.derecha
+
+    if hijo is None:
+        raise Exception(f"No puede hacerse la operacion de zag, debido a que {padre.valor} no tiene hijo derecho")
+    else:
+        padre.derecha = hijo.izquierda
+        hijo.izquierda = padre
+        return hijo
+    
+def zig_zig(abuelo: N) -> N:
+    padre = abuelo.izquierda
+
+    if padre is None:
+        raise Exception(f"No puede realizarse zig-zig debido a que {abuelo.valor} no tiene hijo izquierdo")
+    else:
+        hijo = padre.izquierda
+
+        if hijo is None:
+            raise Exception(f"No puede realizarse zig-zig debido a que {padre.valor} no tiene hijo izquierdo")
+        else:
             derecha_hijo = hijo.derecha
             derecha_padre = padre.derecha
 
@@ -39,20 +40,19 @@ def zig_zig(abuelo:Nodo) -> Nodo:
             padre.derecha = abuelo
             abuelo.izquierda = derecha_padre
 
-            return Nodo(hijo.valor, hijo.izquierda, padre)
+            return hijo
 
-def zag_zag(abuelo:Nodo) -> Nodo:
-    if abuelo.derecha == None:
+def zag_zag(abuelo: N) -> N:
+    padre = abuelo.derecha
+
+    if padre is None:
         raise Exception(f"No puede realizarse zag-zag debido a que {abuelo.valor} no tiene hijo derecho")
-    
     else:
-        padre = abuelo.derecha
-        if padre.derecha == None:
+        hijo = padre.derecha
+
+        if hijo is None:
             raise Exception(f"No puede realizarse zag-zag debido a que {padre.valor} no tiene hijo derecho")
-        
         else:
-            hijo = padre.derecha
-            
             izquierda_hijo = hijo.izquierda
             izquierda_padre = padre.izquierda
 
@@ -62,38 +62,42 @@ def zag_zag(abuelo:Nodo) -> Nodo:
             padre.izquierda = abuelo
             abuelo.derecha = izquierda_padre
 
-            return Nodo(hijo.valor, padre, hijo.derecha)
+            return hijo
         
-def zig_zag(abuelo:Nodo) -> Nodo:
-    if abuelo.derecha == None:
-        raise Exception(f"No puede realizarse zig-zag debido a que {abuelo.valor} no tiene hijo derecho")
-    
-    else:
-        padre = abuelo.derecha
-        if padre.izquierda == None:
-            raise Exception(f"No puede realizarse zig-zag debido a que {padre.valor} no tiene hijo izquierda")
-        
-        else:
-            hijo = padre.izquierda
+def zig_zag(abuelo: N) -> N:
+    padre = abuelo.derecha
 
+    if padre is None:
+        raise Exception(f"No puede realizarse zig-zag debido a que {abuelo.valor} no tiene hijo derecho")
+    else:
+        hijo = padre.izquierda
+
+        if hijo is None:
+            raise Exception(f"No puede realizarse zig-zag debido a que {padre.valor} no tiene hijo izquierdo")
+        else:
             abuelo.derecha = hijo.izquierda
             padre.izquierda = hijo.derecha
 
-            return Nodo(hijo.valor, abuelo, padre)
+            hijo.izquierda = abuelo
+            hijo.derecha = padre
+
+            return hijo
         
-def zag_zig(abuelo:Nodo) -> Nodo:
-    if abuelo.izquierda == None:
-        raise Exception(f"No puede realizarse zig-zag debido a que {abuelo.valor} no tiene hijo derecho")
-    
+def zag_zig(abuelo: N) -> N:
+    padre = abuelo.izquierda
+
+    if padre is None:
+        raise Exception(f"No puede realizarse zag-zig debido a que {abuelo.valor} no tiene hijo izquierdo")
     else:
-        padre = abuelo.izquierda
-        if padre.derecha == None:
-            raise Exception(f"No puede realizarse zig-zag debido a que {padre.valor} no tiene hijo izquierda")
-        
+        hijo = padre.derecha
+
+        if hijo is None:
+            raise Exception(f"No puede realizarse zag-zig debido a que {padre.valor} no tiene hijo derecho")
         else:
-            hijo = padre.derecha
-
-            padre.derecha = hijo.izquierda
             abuelo.izquierda = hijo.derecha
+            padre.derecha = hijo.izquierda
 
-            return Nodo(hijo.valor, padre, abuelo)  
+            hijo.izquierda = padre
+            hijo.derecha = abuelo
+
+            return hijo

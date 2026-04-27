@@ -1,7 +1,8 @@
 from BST.Nodo import Nodo
+from BST.RedBlackTree import NodoRedBlack
 import BST.Rotations as rot
 
-def test_zig():
+def test_zig_Nodo():
     nodo1 = Nodo[int](1)
     nodo2 = Nodo[int](2)
     nodo3 = Nodo[int](3)
@@ -14,7 +15,20 @@ def test_zig():
     nodo_esperado = Nodo(1, None, Nodo(2, None, Nodo(3, None, Nodo(4, None, None))))
     assert nodo_esperado == rot.zig(nodo2)
 
-def test_zag():
+def test_zig_NodoRedBlack():
+    nodo1 = NodoRedBlack[int](1)
+    nodo2 = NodoRedBlack[int](2)
+    nodo3 = NodoRedBlack[int](3)
+    nodo4 = NodoRedBlack[int](4)
+
+    nodo2.izquierda = nodo1
+    nodo2.derecha = nodo3
+    nodo3.derecha = nodo4
+
+    nodo_esperado = Nodo(1, None, Nodo(2, None, Nodo(3, None, Nodo(4, None, None))))
+    assert nodo_esperado == rot.zig(nodo2)
+
+def test_zag_Nodo():
     nodo1 = Nodo[int](1)
     nodo2 = Nodo[int](2)
     nodo3 = Nodo[int](3)
