@@ -1,7 +1,7 @@
-from BST.RedBlackTree import RedBlack, NodoRedBlack
+from BST.RedBlackTree import RedBlackTree, NodoRedBlack
 
 def test_insertion():
-    tree: RedBlack[int] = RedBlack[int]()
+    tree: RedBlackTree[int] = RedBlackTree[int]()
 
     tree.insertar(7)
     tree.insertar(27)

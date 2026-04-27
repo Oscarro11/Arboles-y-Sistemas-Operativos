@@ -13,7 +13,7 @@ class NodoRedBlack(Generic[T], Nodo[T]):
         self.rojo: bool = rojo
 
 
-class RedBlack(Generic[T], BST[T]):
+class RedBlackTree(Generic[T], BST[T]):
     def __init__(self):
         self.raiz: Optional[NodoRedBlack[T]] = None
 

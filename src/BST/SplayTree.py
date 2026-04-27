@@ -77,47 +77,50 @@ class SplayTree(Generic[T], BST[T]):
     def _reordenar(self, recorrido: list[tuple[bool, Nodo[T]]]) -> None:
         i = len(recorrido)-1
 
-        while(i >= 2):
-            padre = recorrido[i]
-            abuelo = recorrido[i-1]
-            bisabuelo = recorrido[i-2]
-
-            match padre[0], abuelo[0]:
-                case True, True: 
-                    if bisabuelo[0]:
-                        bisabuelo[1].derecha = rot.zag_zag(abuelo[1])
-                    else:
-                        bisabuelo[1].izquierda = rot.zag_zag(abuelo[1])
-                        
-                case True, False: 
-                    if bisabuelo[0]:
-                        bisabuelo[1].derecha = rot.zag_zig(abuelo[1])
-                    else:
-                        bisabuelo[1].izquierda = rot.zag_zig(abuelo[1])
-                    
-                case False, True: 
-                    if bisabuelo[0]:
-                        bisabuelo[1].derecha = rot.zig_zag(abuelo[1])
-                    else:
-                        bisabuelo[1].izquierda = rot.zig_zag(abuelo[1])
-
-                case False, False: 
-                    if bisabuelo[0]:
-                        bisabuelo[1].derecha = rot.zig_zig(abuelo[1])
-                    else:
-                        bisabuelo[1].izquierda = rot.zig_zig(abuelo[1])
-            
-            i += -2
-
-        if i == 1:
-            padre = recorrido[1]
-            abuelo = recorrido[0]
-            match padre[0], abuelo[0]:
-                case True, True: self.raiz = rot.zag_zag(abuelo[1])
-                case True, False: self.raiz = rot.zag_zig(abuelo[1])
-                case False, True: self.raiz = rot.zig_zag(abuelo[1])
-                case False, False: self.raiz = rot.zig_zig(abuelo[1])
-        
+        if i < 0:
+            return
         else:
-            if recorrido[0][0]: self.raiz = rot.zag(recorrido[0][1])
-            else: self.raiz = rot.zig(recorrido[0][1])
+            while(i >= 2):
+                padre = recorrido[i]
+                abuelo = recorrido[i-1]
+                bisabuelo = recorrido[i-2]
+
+                match padre[0], abuelo[0]:
+                    case True, True: 
+                        if bisabuelo[0]:
+                            bisabuelo[1].derecha = rot.zag_zag(abuelo[1])
+                        else:
+                            bisabuelo[1].izquierda = rot.zag_zag(abuelo[1])
+                            
+                    case True, False: 
+                        if bisabuelo[0]:
+                            bisabuelo[1].derecha = rot.zag_zig(abuelo[1])
+                        else:
+                            bisabuelo[1].izquierda = rot.zag_zig(abuelo[1])
+                        
+                    case False, True: 
+                        if bisabuelo[0]:
+                            bisabuelo[1].derecha = rot.zig_zag(abuelo[1])
+                        else:
+                            bisabuelo[1].izquierda = rot.zig_zag(abuelo[1])
+
+                    case False, False: 
+                        if bisabuelo[0]:
+                            bisabuelo[1].derecha = rot.zig_zig(abuelo[1])
+                        else:
+                            bisabuelo[1].izquierda = rot.zig_zig(abuelo[1])
+                
+                i += -2
+
+            if i == 1:
+                padre = recorrido[1]
+                abuelo = recorrido[0]
+                match padre[0], abuelo[0]:
+                    case True, True: self.raiz = rot.zag_zag(abuelo[1])
+                    case True, False: self.raiz = rot.zag_zig(abuelo[1])
+                    case False, True: self.raiz = rot.zig_zag(abuelo[1])
+                    case False, False: self.raiz = rot.zig_zig(abuelo[1])
+            
+            else:
+                if recorrido[0][0]: self.raiz = rot.zag(recorrido[0][1])
+                else: self.raiz = rot.zig(recorrido[0][1])
